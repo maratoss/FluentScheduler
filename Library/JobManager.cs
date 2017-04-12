@@ -404,7 +404,7 @@
 
             lock (_running)
             {
-                if (!schedule.Reentrant && _running.Any(t => t.Item1 == schedule))
+                if (!schedule.Reentrant && _running.Any(t => t.Item1.Name == schedule.Name))
                     return;
             }
 
@@ -465,6 +465,8 @@
 
             lock (_running)
             {
+                if (!schedule.Reentrant && _running.Any(t => t.Item1.Name == schedule.Name))
+                    return;
                 _running.Add(tuple);
             }
 
